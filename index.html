@@ -1,0 +1,1173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no" />
+<title>Sharanya.exe 🌷</title>
+<link href="https://fonts.googleapis.com/css2?family=VT323&family=Nunito:wght@400;600;700;800&family=Bebas+Neue&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0F0F15;
+    --terminal-bg: #1A1A24;
+    --terminal-border: #3A3A4F;
+    --header-bg: #252535;
+    --pink: #A8739A;
+    --pink-dark: #6B4F6B;
+    --pink-light: #4A4A5F;
+    --peach: #8B7355;
+    --mint: #6B9B8B;
+    --lavender: #7B6FA8;
+    --yellow: #9B8B5F;
+    --text: #E8E8F0;
+    --text-muted: #A8A8B8;
+    --prompt-color: #A8739A;
+    --output-color: #D8D8E8;
+    --error-color: #9B6B7B;
+    --success-color: #7B9B8B;
+    --cursor-color: #A8739A;
+    --dot-red: #8B5F6B;
+    --dot-yellow: #8B7B5F;
+    --dot-green: #6B8B7B;
+  }
+
+  html, body {
+    height: 100%;
+    font-family: 'Nunito', sans-serif;
+    background: var(--bg);
+    overflow: hidden;
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  input, button {
+    -webkit-user-select: text;
+    user-select: text;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* === BACKGROUND DECO === */
+  body::before {
+    content: '🌸 ✨ 🌷 💖 ⭐ 🍓 🌸 ✨ 💕 🌺 ⭐ 🦋 🌸 💫 🍑 🌷 ✨ 💖 🌸 ⭐ 🌸 ✨ 🌷 💖 ⭐ 🍓 🌸 ✨ 💕 🌺 ⭐ 🦋 🌸 💫 🍑 🌷 ✨ 💖 🌸 ⭐ 🌸 ✨ 🌷 💖 ⭐ 🍓 🌸 ✨ 💕 🌺 ⭐ 🦋 🌸 💫 🍑 🌷 ✨ 💖 🌸 ⭐ 🌸 ✨ 🌷 💖 ⭐ 🍓 🌸 ✨ 💕 🌺 ⭐ 🦋 🌸 💫 🍑 🌷 ✨ 💖 🌸 ⭐';
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    font-size: 2.4rem;
+    letter-spacing: 2.2rem;
+    line-height: 3.2rem;
+    color: rgba(168, 115, 154, 0.25);
+    word-break: break-all;
+    pointer-events: none;
+    z-index: 0;
+    padding: 1rem;
+    white-space: pre-wrap;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    animation: float-bg 20s ease-in-out infinite;
+  }
+
+  @keyframes float-bg {
+    0%, 100% { opacity: 0.25; }
+    50% { opacity: 0.35; }
+  }
+
+  /* === SECONDARY BACKGROUND LAYER === */
+  body::after {
+    content: '✨ 🌷 🍓 💖 🌺 ⭐ 🦋 💫 🍑 🌸 ✨ 🌷 💖 ⭐ 🌸 ✨ 💕 🌺 🦋 🌸 💫 ✨ 🌷 💖 ⭐ 🍓 🌸 ✨ 💕 🌺 ⭐ 🦋 🌸 💫 🍑 🌷 ✨ 💖 🌸 ⭐ ✨ 🌷 💖 ⭐ 🍓 🌸 ✨ 💕 🌺 ⭐ 🦋 🌸 💫 🍑 🌷 ✨ 💖 🌸 ⭐ ✨ 🌷 🍓 💖 🌺 ⭐ 🦋 💫 🍑 🌸 ✨ 🌷 💖 ⭐ 🌸 ✨ 💕 🌺 🦋 🌸 💫 ✨ 🌷 💖';
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    font-size: 1.8rem;
+    letter-spacing: 2.8rem;
+    line-height: 3.6rem;
+    color: rgba(168, 115, 154, 0.15);
+    word-break: break-all;
+    pointer-events: none;
+    z-index: 0;
+    padding: 4rem 1rem;
+    white-space: pre-wrap;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    animation: float-bg-reverse 25s ease-in-out infinite;
+  }
+
+  @keyframes float-bg-reverse {
+    0%, 100% { opacity: 0.15; }
+    50% { opacity: 0.25; }
+  }
+
+  .desktop {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    padding: 1.5rem;
+  }
+
+  /* === WINDOW === */
+  .window {
+    width: 100%;
+    max-width: 760px;
+    height: min(540px, 80vh);
+    background: var(--terminal-bg);
+    border-radius: 18px;
+    border: 2px solid var(--terminal-border);
+    box-shadow:
+      0 0 0 4px rgba(168, 115, 154, 0.08),
+      0 24px 80px rgba(0, 0, 0, 0.4),
+      0 8px 24px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    animation: windowPop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  }
+
+  @keyframes windowPop {
+    from { opacity: 0; transform: scale(0.92) translateY(16px); }
+    to   { opacity: 1; transform: scale(1) translateY(0); }
+  }
+
+  /* === TITLE BAR === */
+  .titlebar {
+    background: var(--header-bg);
+    padding: 0.75rem 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    border-bottom: 2px solid var(--terminal-border);
+    flex-shrink: 0;
+    user-select: none;
+  }
+
+  .dots { display: flex; gap: 6px; align-items: center; }
+  .dot {
+    width: 12px; height: 12px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: filter 0.15s;
+  }
+  .dot:hover { filter: brightness(0.85); }
+  .dot-r { background: var(--dot-red); }
+  .dot-y { background: var(--dot-yellow); }
+  .dot-g { background: var(--dot-green); }
+
+  .title-text {
+    flex: 1;
+    text-align: center;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 0.85rem;
+    color: var(--pink-dark);
+    letter-spacing: 0.04em;
+  }
+
+  .title-icon { font-size: 1rem; }
+
+  /* === TERMINAL BODY === */
+  .terminal-body {
+    flex: 1;
+    overflow-y: auto;
+    padding: 1.25rem 1.5rem;
+    scroll-behavior: smooth;
+  }
+
+  .terminal-body::-webkit-scrollbar { width: 6px; }
+  .terminal-body::-webkit-scrollbar-track { background: transparent; }
+  .terminal-body::-webkit-scrollbar-thumb {
+    background: var(--pink-light);
+    border-radius: 99px;
+  }
+
+  /* === OUTPUT LINES === */
+  .line {
+    font-family: 'VT323', monospace;
+    font-size: 1.2rem;
+    line-height: 1.55;
+    margin-bottom: 2px;
+    white-space: pre-wrap;
+    word-break: break-word;
+    animation: lineIn 0.25s ease both;
+  }
+
+  @keyframes lineIn {
+    from { opacity: 0; transform: translateX(-6px); }
+    to   { opacity: 1; transform: translateX(0); }
+  }
+
+  .line-prompt { color: var(--prompt-color); }
+  .line-output { color: var(--output-color); padding-left: 1.2rem; }
+  .line-error  { color: var(--error-color); padding-left: 1.2rem; }
+  .line-success{ color: var(--success-color); padding-left: 1.2rem; }
+  .line-spacer { height: 0.4rem; }
+  .line-art    { color: var(--pink); padding-left: 1rem; font-size: 1.1rem; line-height: 1.4; }
+  .line-info   { color: var(--lavender); padding-left: 1.2rem; font-weight: bold; }
+
+  /* === INPUT AREA === */
+  .input-area {
+    border-top: 2px solid var(--terminal-border);
+    background: var(--header-bg);
+    padding: 0.75rem 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-shrink: 0;
+  }
+
+  .input-prompt {
+    font-family: 'VT323', monospace;
+    font-size: 1.25rem;
+    color: var(--prompt-color);
+    white-space: nowrap;
+    user-select: none;
+  }
+
+  .input-field {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-family: 'VT323', monospace;
+    font-size: 1.25rem;
+    color: var(--text);
+    caret-color: var(--cursor-color);
+  }
+
+  .input-field::placeholder { color: var(--pink-light); }
+  
+  /* Mobile touch adjustments */
+  @supports (padding: max(0px)) {
+    .input-field {
+      padding: 0 0 0 0;
+    }
+  }
+
+  /* === HELP CHIPS === */
+  .chips-wrap {
+    padding: 0.5rem 1.5rem 0.75rem;
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    background: var(--terminal-bg);
+    border-top: 1px solid rgba(255,179,198,0.4);
+    flex-shrink: 0;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .chip {
+    font-family: 'VT323', monospace;
+    font-size: 1rem;
+    padding: 0.2rem 0.7rem;
+    border-radius: 999px;
+    border: 1.5px solid var(--terminal-border);
+    color: var(--pink-dark);
+    background: var(--header-bg);
+    cursor: pointer;
+    transition: background 0.15s, transform 0.1s;
+    user-select: none;
+  }
+  .chip:hover { background: var(--pink-light); transform: translateY(-1px); }
+  .chip:active { transform: scale(0.96); }
+
+  /* === THEME SWITCHER === */
+  .theme-btn {
+    position: fixed;
+    top: 1.5rem;
+    right: 1.5rem;
+    z-index: 200;
+    background: var(--header-bg);
+    border: 2px solid var(--terminal-border);
+    color: var(--text);
+    padding: 0.6rem 1rem;
+    border-radius: 999px;
+    cursor: pointer;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+    user-select: none;
+  }
+  .theme-btn:hover { 
+    background: var(--pink);
+    border-color: var(--pink);
+    color: var(--bg);
+    transform: translateY(-2px);
+  }
+  .theme-btn:active { transform: scale(0.98); }
+
+  /* === BIG NAME === */
+  .big-name {
+    text-align: center;
+    margin-bottom: 0.6rem;
+    line-height: 1;
+    user-select: none;
+    animation: windowPop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  }
+
+  .big-name span {
+    font-family: 'Bebas Neue', 'Playfair Display', sans-serif;
+    font-weight: 900;
+    font-size: clamp(3rem, 10vw, 5rem);
+    color: var(--pink);
+    text-shadow:
+      0 2px 0 var(--pink-dark),
+      0 3px 0 var(--pink-dark),
+      0 4px 0 var(--pink-dark),
+      0 6px 12px rgba(0,0,0,0.5);
+    letter-spacing: 0.08em;
+    display: inline-block;
+    background: linear-gradient(135deg, #A8739A 0%, #C89BAB 40%, #6B4F6B 80%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    filter: drop-shadow(0 3px 8px rgba(0,0,0,0.4));
+    transform: scaleY(0.95);
+    font-style: normal;
+  }
+
+  .big-name .name-tag {
+    display: inline-block;
+    font-size: 1.1rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, var(--header-bg) 0%, #3A3A4F 100%);
+    border: 2px solid var(--pink);
+    color: var(--pink);
+    border-radius: 999px;
+    padding: 0.2rem 1rem;
+    margin-left: 0.8rem;
+    vertical-align: middle;
+    -webkit-text-fill-color: var(--pink);
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+    font-family: 'Bebas Neue', sans-serif;
+    letter-spacing: 0.06em;
+  }
+
+  /* === RESPONSIVE === */
+  @media (max-width: 768px) {
+    .big-name span {
+      font-size: clamp(2.2rem, 8vw, 3.5rem);
+    }
+    
+    .big-name .name-tag {
+      font-size: 0.9rem;
+      padding: 0.15rem 0.7rem;
+      margin-left: 0.5rem;
+    }
+    
+    .desktop { 
+      padding: 0.5rem;
+      padding-top: 3.5rem;
+    }
+    
+    .window { 
+      border-radius: 14px; 
+      height: min(calc(100vh - 6rem), 650px);
+      max-width: 100%;
+    }
+    
+    .terminal-body { 
+      padding: 0.9rem; 
+      font-size: 0.95rem;
+    }
+    
+    .terminal-body::-webkit-scrollbar { width: 4px; }
+    
+    .input-area { 
+      padding: 0.5rem 0.75rem; 
+      gap: 0.3rem;
+    }
+    
+    .input-prompt {
+      font-size: 1.1rem;
+      white-space: nowrap;
+    }
+    
+    .input-field {
+      font-size: 1.1rem;
+    }
+    
+    .chips-wrap { 
+      padding: 0.4rem 0.75rem 0.5rem;
+      gap: 0.35rem;
+      overflow-x: auto;
+      overflow-y: hidden;
+      max-height: 3rem;
+      flex-wrap: nowrap;
+    }
+    
+    .chips-wrap::-webkit-scrollbar { height: 3px; }
+    .chips-wrap::-webkit-scrollbar-thumb { background: var(--pink-light); border-radius: 99px; }
+    
+    .chip {
+      font-size: 0.85rem;
+      padding: 0.15rem 0.6rem;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    
+    .line { 
+      font-size: 1rem;
+      line-height: 1.4;
+    }
+    
+    .line-output,
+    .line-error,
+    .line-success,
+    .line-info {
+      padding-left: 0.8rem;
+    }
+    
+    .line-art {
+      padding-left: 0.6rem;
+      font-size: 1rem;
+      line-height: 1.3;
+    }
+    
+    .theme-btn {
+      top: 0.75rem;
+      right: 0.75rem;
+      padding: 0.5rem 0.8rem;
+      font-size: 0.8rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .big-name {
+      margin-bottom: 0.4rem;
+    }
+    
+    .big-name span {
+      font-size: clamp(1.8rem, 6vw, 2.8rem);
+      text-shadow:
+        0 1px 0 var(--pink-dark),
+        0 2px 0 var(--pink-dark),
+        0 3px 0 var(--pink-dark),
+        0 4px 8px rgba(0,0,0,0.4);
+    }
+    
+    .big-name .name-tag {
+      font-size: 0.8rem;
+      padding: 0.1rem 0.5rem;
+      margin-left: 0.3rem;
+    }
+    
+    .desktop {
+      padding: 0.4rem;
+      padding-top: 3rem;
+    }
+    
+    .window {
+      height: min(calc(100vh - 5rem), 600px);
+      border: 1.5px solid var(--terminal-border);
+      border-radius: 12px;
+    }
+    
+    .titlebar {
+      padding: 0.6rem 0.75rem;
+    }
+    
+    .title-text {
+      font-size: 0.75rem;
+      letter-spacing: 0.02em;
+    }
+    
+    .dots {
+      gap: 4px;
+    }
+    
+    .dot {
+      width: 10px;
+      height: 10px;
+    }
+    
+    .terminal-body {
+      padding: 0.75rem;
+      font-size: 0.9rem;
+    }
+    
+    .input-area {
+      padding: 0.4rem 0.6rem;
+      gap: 0.25rem;
+    }
+    
+    .input-prompt {
+      font-size: 0.95rem;
+    }
+    
+    .input-field {
+      font-size: 0.95rem;
+    }
+    
+    .chips-wrap {
+      padding: 0.3rem 0.6rem 0.4rem;
+      gap: 0.25rem;
+    }
+    
+    .chip {
+      font-size: 0.75rem;
+      padding: 0.12rem 0.5rem;
+      border: 1px solid var(--terminal-border);
+    }
+    
+    .line {
+      font-size: 0.9rem;
+      line-height: 1.3;
+      margin-bottom: 1px;
+    }
+    
+    .line-output,
+    .line-error,
+    .line-success,
+    .line-info {
+      padding-left: 0.6rem;
+    }
+    
+    .line-art {
+      padding-left: 0.4rem;
+      font-size: 0.95rem;
+      line-height: 1.2;
+    }
+    
+    .theme-btn {
+      top: 0.5rem;
+      right: 0.5rem;
+      padding: 0.4rem 0.7rem;
+      font-size: 0.75rem;
+      border: 1px solid var(--terminal-border);
+    }
+  }
+</style>
+</head>
+<body>
+<button class="theme-btn" id="themeBtn">🌙 Dark</button>
+<div class="desktop">
+  <div style="display:flex;flex-direction:column;align-items:center;width:100%;max-width:760px;">
+  <div class="big-name">
+    <span>SHARANYA<span class="name-tag">✨ .exe</span></span>
+  </div>
+  <div class="window" style="width:100%;">
+
+    <!-- Title Bar -->
+    <div class="titlebar">
+      <div class="dots">
+        <div class="dot dot-r"></div>
+        <div class="dot dot-y"></div>
+        <div class="dot dot-g"></div>
+      </div>
+      <div class="title-text">✨ sharanya.exe — Portfolio Terminal v1.3 🌸</div>
+      <div class="title-icon">🎀</div>
+    </div>
+
+    <!-- Terminal Output -->
+    <div class="terminal-body" id="output"></div>
+
+    <!-- Command Chips -->
+    <div class="chips-wrap" id="chips">
+      <span class="chip" onclick="runCommand('help')">help</span>
+      <span class="chip" onclick="runCommand('whoami')">whoami</span>
+      <span class="chip" onclick="runCommand('hobbies')">hobbies</span>
+      <span class="chip" onclick="runCommand('projects')">projects</span>
+      <span class="chip" onclick="runCommand('game')">game</span>
+      <span class="chip" onclick="runCommand('fun')">fun</span>
+      <span class="chip" onclick="runCommand('clear')">clear</span>
+    </div>
+
+    <!-- Input -->
+    <div class="input-area">
+      <span class="input-prompt">sharanya@portfolio:~$</span>
+      <input
+        class="input-field"
+        id="cmdInput"
+        type="text"
+        placeholder="type a command and press Enter..."
+        autocomplete="off"
+        autocorrect="off"
+        spellcheck="false"
+      />
+    </div>
+
+  </div>
+  </div>
+</div>
+
+<script>
+const THEMES = {
+  dark: {
+    name: 'Dark',
+    icon: '🌙',
+    colors: {
+      '--bg': '#0F0F15',
+      '--terminal-bg': '#1A1A24',
+      '--terminal-border': '#3A3A4F',
+      '--header-bg': '#252535',
+      '--pink': '#A8739A',
+      '--pink-dark': '#6B4F6B',
+      '--pink-light': '#4A4A5F',
+      '--text': '#E8E8F0',
+      '--text-muted': '#A8A8B8',
+      '--output-color': '#D8D8E8',
+      '--error-color': '#9B6B7B',
+      '--success-color': '#7B9B8B',
+    }
+  },
+  light: {
+    name: 'Light',
+    icon: '☀️',
+    colors: {
+      '--bg': '#FFF5F7',
+      '--terminal-bg': '#FFF0F3',
+      '--terminal-border': '#FFB3C6',
+      '--header-bg': '#FFD6E0',
+      '--pink': '#FF6B9D',
+      '--pink-dark': '#D64D7A',
+      '--pink-light': '#FFB3C6',
+      '--text': '#3D1A24',
+      '--text-muted': '#9A6B78',
+      '--output-color': '#3D1A24',
+      '--error-color': '#D64D7A',
+      '--success-color': '#5FAD8A',
+    }
+  },
+  calm: {
+    name: 'Calm Blue',
+    icon: '💙',
+    colors: {
+      '--bg': '#0D1B2A',
+      '--terminal-bg': '#1B263B',
+      '--terminal-border': '#415A77',
+      '--header-bg': '#2A3F5F',
+      '--pink': '#7BA3C0',
+      '--pink-dark': '#415A77',
+      '--pink-light': '#556E8D',
+      '--text': '#E0E1E6',
+      '--text-muted': '#8A96AA',
+      '--output-color': '#D4DFE6',
+      '--error-color': '#A89B8B',
+      '--success-color': '#7FB7A8',
+    }
+  },
+  forest: {
+    name: 'Forest',
+    icon: '🌲',
+    colors: {
+      '--bg': '#0F1419',
+      '--terminal-bg': '#1B2328',
+      '--terminal-border': '#3D4D3F',
+      '--header-bg': '#2A3530',
+      '--pink': '#8BA895',
+      '--pink-dark': '#556155',
+      '--pink-light': '#4A5A4D',
+      '--text': '#E8F0E8',
+      '--text-muted': '#A8B5A8',
+      '--output-color': '#D8E0D8',
+      '--error-color': '#9B8B8B',
+      '--success-color': '#8BA895',
+    }
+  }
+};
+
+let currentTheme = 'dark';
+
+function applyTheme(themeName) {
+  const theme = THEMES[themeName];
+  if (!theme) return;
+  
+  Object.entries(theme.colors).forEach(([key, value]) => {
+    document.documentElement.style.setProperty(key, value);
+  });
+  
+  currentTheme = themeName;
+  localStorage.setItem('shareanyaTheme', themeName);
+  
+  const btn = document.getElementById('themeBtn');
+  btn.textContent = theme.icon + ' ' + theme.name;
+}
+
+function cycleTheme() {
+  const themeNames = Object.keys(THEMES);
+  const currentIndex = themeNames.indexOf(currentTheme);
+  const nextIndex = (currentIndex + 1) % themeNames.length;
+  applyTheme(themeNames[nextIndex]);
+}
+
+document.getElementById('themeBtn').addEventListener('click', cycleTheme);
+
+// Load saved theme
+const savedTheme = localStorage.getItem('shareanyaTheme') || 'dark';
+applyTheme(savedTheme);
+
+const output = document.getElementById('output');
+const input  = document.getElementById('cmdInput');
+let history  = [];
+let histIdx  = -1;
+
+const BOOT = [
+  { t:'art', v:' _____ _                                       ' },
+  { t:'art', v:'/ ____| |                                      ' },
+  { t:'art', v:'| (___ | |__   __ _ _ __ __ _ _ __  _   _  __ _ ' },
+  { t:'art', v:"\\___ \\| '_ \\ / _` | '__/ _` | '_ \\| | | |/ _` |" },
+  { t:'art', v:'____) | | | | (_| | | | (_| | | | | |_| | (_| |' },
+  { t:'art', v:'|_____/|_| |_|\\__,_|_|  \\__,_|_| |_|\\__, |\\__,_|' },
+  { t:'art', v:'                                       __/ |     ' },
+  { t:'art', v:'                                      |___/  🌸  ' },
+  { t:'spacer' },
+  { t:'output', v:'💖  Welcome to SHARANYA.EXE — cutest terminal in the USA!' },
+  { t:'output', v:'🎨  Artist | ✍️  Writer | 📚  Reader | 7th Grader' },
+  { t:'output', v:'🌸  Running on: Imagination OS 13.7, Cozy Edition' },
+  { t:'spacer' },
+  { t:'info',   v:'Type  help  to see all commands. Or just click the buttons below!' },
+  { t:'spacer' },
+];
+
+const COMMANDS = {
+  help: () => [
+    { t:'output', v:'╔══════════════════════════════════════════╗' },
+    { t:'output', v:'║   📋  SHARANYA COMMAND MANUAL v1.0  🌸   ║' },
+    { t:'output', v:'╚══════════════════════════════════════════╝' },
+    { t:'spacer' },
+    { t:'output', v:'  whoami      →  Who even IS Sharanya???' },
+    { t:'output', v:'  hobbies     →  What does she do for fun?' },
+    { t:'output', v:'  projects    →  Her coolest work so far' },
+    { t:'output', v:'  skills      →  Sharanya\'s power list ⚡' },
+    { t:'output', v:'  location    →  GPS ping Sharanya\'s HQ' },
+    { t:'output', v:'  fun         →  A surprise. Trust the process.' },
+    { t:'output', v:'  cookie      →  Get a fortune cookie 🥠' },
+    { t:'output', v:'  game        →  Play rock paper scissors 🎮' },
+    { t:'output', v:'  hack        →  Oh. You should NOT do this.' },
+    { t:'output', v:'  vibe        →  Check current vibe status' },
+    { t:'output', v:'  fav         →  Her absolute faves list' },
+    { t:'output', v:'  pets        →  Does she have pets??' },
+    { t:'output', v:'  clear       →  Clean up the mess' },
+    { t:'spacer' },
+    { t:'info',   v:'Pro tip: try typing random stuff. See what happens 👀' },
+  ],
+
+  whoami: () => [
+    { t:'output', v:'> Loading identity... buffering... still loading... ok here we go 🔍' },
+    { t:'spacer' },
+    { t:'output', v:'  NAME     :  Sharanya 🌸' },
+    { t:'output', v:'             (yes it\'s a mouthful. yes it\'s spelled that way. no, not Sharon.)' },
+    { t:'output', v:'  GRADE    :  7th (officially a Big Kid™ with a homework problem)' },
+    { t:'output', v:'  LOCATION :  USA 🇺🇸 (exact coords: somewhere between art class & her bed)' },
+    { t:'output', v:'  SPECIES  :  Creative human. 70% imagination, 30% snacks.' },
+    { t:'output', v:'  POWERS   :  Art, Writing, Making teachers say "wow this is really good"' },
+    { t:'output', v:'  WEAKNESS :  New sketchbooks. A new book series. Stationery sales. 😵' },
+    { t:'output', v:'  MOOD     :  Currently: ✨ thriving (ask again after homework)' },
+    { t:'output', v:'  FUN FACT :  Her name means "joy" in Sanskrit. She lives up to it.' },
+    { t:'spacer' },
+    { t:'success',v:'Identity verified. She is, in fact, that girl. 💖' },
+  ],
+
+  hobbies: () => [
+    { t:'output', v:'> Scanning hobby database... please hold, she has a LOT 🎀' },
+    { t:'spacer' },
+    { t:'output', v:'  🎨  DRAWING & PAINTING' },
+    { t:'output', v:'      Watercolours are her love language. Seriously.' },
+    { t:'output', v:'      She has 3 full sketchbooks. And a 4th "just started." And a 5th "for good pens only."' },
+    { t:'output', v:'      She will buy another sketchbook. There is no stopping this.' },
+    { t:'spacer' },
+    { t:'output', v:'  ✍️   WRITING STORIES' },
+    { t:'output', v:'      Fantasy. Mystery. Characters with too many feelings (relatable).' },
+    { t:'output', v:'      Started in 4th grade. Has not stopped. Help.' },
+    { t:'output', v:'      She names her characters before she names her plants.' },
+    { t:'spacer' },
+    { t:'output', v:'  📚  READING' },
+    { t:'output', v:'      Percy Jackson. Harry Potter. Anything with a plot twist.' },
+    { t:'output', v:'      She gasps out loud. In public. Zero regrets.' },
+    { t:'output', v:'      Has said "just one more chapter" at 1am. Multiple times.' },
+    { t:'spacer' },
+    { t:'output', v:'  🌿  NATURE WALKS' },
+    { t:'output', v:'      She goes for walks. But actually just to find cool leaves to sketch.' },
+    { t:'output', v:'      Has drawn 47 clouds. This is documented. In a dedicated cloud journal.' },
+    { t:'spacer' },
+    { t:'success',v:'Hobby scan complete. Verdict: dangerously talented at everything. ✅' },
+  ],
+
+  projects: () => [
+    { t:'output', v:'> Loading project files... this may take a moment, she\'s done a LOT 🌸' },
+    { t:'spacer' },
+    { t:'output', v:'  📁  PROJECT 001: "The Forest at Dawn"' },
+    { t:'output', v:'      Type: Watercolour Painting' },
+    { t:'output', v:'      Status: COMPLETED ✅ (and hanging on the wall, obviously)' },
+    { t:'output', v:'      Note: Used wet-on-wet technique. Looked it up on YouTube at 11pm.' },
+    { t:'output', v:'      Her mom said "wow." Her dad said "wait you made this??" SAME.' },
+    { t:'spacer' },
+    { t:'output', v:'  📁  PROJECT 002: "The Girl Who Could Hear Stars"' },
+    { t:'output', v:'      Type: Fantasy Short Story (a banger, actually)' },
+    { t:'output', v:'      Status: WON 2ND PLACE 🏆 — school writing competition' },
+    { t:'output', v:'      Note: 3 people cried. She is not sorry. She is proud.' },
+    { t:'output', v:'      The girl who won 1st place? Sharanya is still thinking about it.' },
+    { t:'spacer' },
+    { t:'output', v:'  📁  PROJECT 003: "Adventures of Luna & Pip"' },
+    { t:'output', v:'      Type: 6-page Comic Strip (art + story = unstoppable combo)' },
+    { t:'output', v:'      Status: FAVOURITE THING SHE\'S EVER MADE 💕' },
+    { t:'output', v:'      Note: Luna is a girl. Pip is a robot. They\'re besties. Don\'t cry.' },
+    { t:'output', v:'      (You will cry. Just warning you.)' },
+    { t:'spacer' },
+    { t:'success',v:'Project files loaded. Conclusion: she is literally that girl. 💫' },
+  ],
+
+  skills: () => [
+    { t:'output', v:'> Running skills audit... please hold while we measure greatness ⚡' },
+    { t:'spacer' },
+    { t:'output', v:'  Watercolour painting  ████████████  99%  (the 1% is drying time, she\'s impatient)' },
+    { t:'output', v:'  Storytelling          ████████████  97%  (loses 3% to plot holes she ignores)' },
+    { t:'output', v:'  Character design      ██████████░░  88%  (all her characters are way too cool)' },
+    { t:'output', v:'  Being creative        ████████████  100% (it never turns off. never.)' },
+    { t:'output', v:'  Making things cozy    ████████████  ∞%   (immeasurable. off the charts.)' },
+    { t:'output', v:'  Waking up for school  ███░░░░░░░░░  28%  (a known issue. patches pending.)' },
+    { t:'output', v:'  Convincing parents    ████░░░░░░░░  34%  (for art supplies: 89%. bedtime: 2%.)' },
+    { t:'output', v:'  Finishing snacks      ██████████░░  91%  (lost 9% to "saving some for later")' },
+    { t:'spacer' },
+    { t:'info',   v:'Overall skill rating: S+ TIER. Extraordinarily talented. Schools are lucky.' },
+  ],
+
+  location: () => [
+    { t:'output', v:'> Pinging GPS satellite... 🛰️' },
+    { t:'output', v:'> Triangulating... ' },
+    { t:'output', v:'> Signal acquired! 📍' },
+    { t:'spacer' },
+    { t:'output', v:'  COUNTRY  :  United States of America 🇺🇸' },
+    { t:'output', v:'  REGION   :  Somewhere cozy with good Wi-Fi' },
+    { t:'output', v:'  TIMEZONE :  The one where she stays up too late drawing' },
+    { t:'output', v:'  LANDMARK :  Her desk, covered in art supplies' },
+    { t:'output', v:'  VIBE     :  Warm lamp light, lo-fi music, sketchbook open' },
+    { t:'spacer' },
+    { t:'success',v:'Location found: Maximum Coziness Zone 🌸' },
+  ],
+
+  fun: () => [
+    { t:'output', v:'> Activating FUN MODE... 🎉' },
+    { t:'spacer' },
+    { t:'art',    v:'    (\\_(\\   ' },
+    { t:'art',    v:'    ( •.•)  ← this is Sharanya\'s spirit animal' },
+    { t:'art',    v:'    o_(")(")\\ a bunny with her sketchbook' },
+    { t:'spacer' },
+    { t:'output', v:'  DID YOU KNOW?' },
+    { t:'output', v:'  Sharanya once drew for 4 hours straight.' },
+    { t:'output', v:'  Her hand survived. Barely.' },
+    { t:'spacer' },
+    { t:'output', v:'  She also once wrote 1,200 words in one sitting.' },
+    { t:'output', v:'  Powered entirely by chocolate and determination.' },
+    { t:'spacer' },
+    { t:'success',v:'Fun mode: SUCCESS. You are now smiling. You\'re welcome. 😄' },
+  ],
+
+  cookie: () => {
+    const cookies = [
+      'A blank page is not empty — it\'s full of possibilities. 🌸',
+      'Your art does not need to be perfect. It needs to be yours. 🎨',
+      'Someone out there will read your story and feel less alone. ✨',
+      'The next sketchbook is always the best one. (This is a fact.)',
+      'You are creative, capable, and also deserve a snack right now. 🍪',
+      'Every great artist was once a beginner who just kept going. 💖',
+      'Your weirdest ideas are probably your best ones. Trust them.',
+      'Draw the thing. Write the thing. You can edit later. 🖊️',
+    ];
+    const msg = cookies[Math.floor(Math.random() * cookies.length)];
+    return [
+      { t:'output', v:'> Cracking fortune cookie... 🥠' },
+      { t:'spacer' },
+      { t:'output', v:'  ┌─────────────────────────────────────┐' },
+      { t:'output', v:'  │  🥠  Your fortune:                  │' },
+      { t:'output', v:'  │                                     │' },
+      { t:'output', v:'  │  ' + msg.padEnd(35) + '│' },
+      { t:'output', v:'  └─────────────────────────────────────┘' },
+      { t:'spacer' },
+      { t:'info',   v:'Type  cookie  again for another one! 🌸' },
+    ];
+  },
+
+  hack: () => [
+    { t:'output', v:'> Initiating hack sequence... 💻' },
+    { t:'output', v:'> Bypassing firewall...' },
+    { t:'output', v:'> Accessing mainframe...' },
+    { t:'output', v:'> Downloading universe...' },
+    { t:'spacer' },
+    { t:'error',  v:'ERROR 404: Hacking is not a hobby Sharanya approves of.' },
+    { t:'error',  v:'REDIRECTING to approved activities...' },
+    { t:'spacer' },
+    { t:'output', v:'> Opening sketchbook instead. Much better. 🎨' },
+    { t:'output', v:'> World is saved. You\'re welcome.' },
+    { t:'spacer' },
+    { t:'success',v:'Threat neutralized with glitter and watercolours. ✨' },
+  ],
+
+  vibe: () => {
+    const vibes = [
+      '🌸 Soft & Cozy — like a warm blanket and lo-fi music',
+      '✨ Sparkling — everything is shiny and possible today',
+      '🎨 Artsy — brain is full of colours and ideas',
+      '📚 Bookworm Mode — do not disturb, reading is happening',
+      '☁️  Dreamy — somewhere between reality and a story plot',
+    ];
+    const v = vibes[Math.floor(Math.random() * vibes.length)];
+    return [
+      { t:'output', v:'> Checking current vibe levels... 📡' },
+      { t:'spacer' },
+      { t:'output', v:'  CURRENT VIBE: ' + v },
+      { t:'spacer' },
+      { t:'info',   v:'Vibe refreshes every time you check. Science.' },
+    ];
+  },
+
+  fav: () => [
+    { t:'output', v:'> Loading favourites.json... she has opinions. strong ones. 💾' },
+    { t:'spacer' },
+    { t:'output', v:'  COLOUR    :  Dusty rose + sage green. She did not invent this combo. She perfected it.' },
+    { t:'output', v:'  BOOK      :  Percy Jackson. She will argue about this at the dinner table. She has.' },
+    { t:'output', v:'  ART TOOL  :  Watercolour brush (the nice squishy one she guards with her life)' },
+    { t:'output', v:'  SNACK     :  Strawberries 🍓 (will eat entire punnet. no regrets.)' },
+    { t:'output', v:'  SEASON    :  Autumn 🍂 (cozy aesthetic fully unlocked. pumpkins: appreciated.)' },
+    { t:'output', v:'  MUSIC     :  Lo-fi playlist: "draw & dream". on loop. forever.' },
+    { t:'output', v:'  TIME      :  Golden hour light for drawing ☀️ (she will wait for it. she is patient for this.)' },
+    { t:'output', v:'  ENEMY     :  When her pen runs out mid-sketch. Dark times. Dark times indeed.' },
+    { t:'spacer' },
+    { t:'success',v:'Favourites file: a masterpiece of taste. curated with deadly seriousness. 10/10.' },
+  ],
+
+  pets: () => [
+    { t:'output', v:'> Searching pet registry... 🐾' },
+    { t:'spacer' },
+    { t:'output', v:'  REAL PETS: 0' },
+    { t:'output', v:'  (She has asked. Multiple times. In many creative ways. The answer remains no.)' },
+    { t:'spacer' },
+    { t:'output', v:'  HOWEVER. She has drawn 23 animals and they are LEGALLY her pets now.' },
+    { t:'spacer' },
+    { t:'output', v:'  Current art-pets on file:' },
+    { t:'output', v:'    🐰  Mochi — a bunny. very fluffy. suspiciously wise.' },
+    { t:'output', v:'    🦊  Ember — a fox. chaotic. probably the main character.' },
+    { t:'output', v:'    🐱  Bluebell — a cat. judges everyone. deserves a spinoff.' },
+    { t:'spacer' },
+    { t:'info',   v:'All fictional. All beloved. All more behaved than real pets, probably.' },
+  ],
+
+  clear: () => { output.innerHTML = ''; return []; },
+
+  game: () => {
+    window.shareenyaGame = { score: 0, computerScore: 0, over: false };
+    return [
+      { t:'output', v:'> Initializing ROCK PAPER SCISSORS... 🎮' },
+      { t:'spacer' },
+      { t:'output', v:'  Play against Sharanya!' },
+      { t:'output', v:'  Type: rock, paper, or scissors' },
+      { t:'spacer' },
+      { t:'output', v:'  First to 3 wins takes all the glory.' },
+      { t:'spacer' },
+      { t:'info',   v:'Your score: 0 | Sharanya\'s score: 0' },
+      { t:'spacer' },
+      { t:'output', v:'Make your move! 🎯' },
+    ];
+  },
+};
+
+const EASTER_EGGS = {
+  sudo: [
+    { t:'error',  v:'sudo: permission denied. (Only Sharanya has root access.)' },
+    { t:'output', v:'Nice try though. Very hacker of you. 🕵️' },
+  ],
+  ls: [
+    { t:'output', v:'art/   stories/   sketchbooks/   dreams/   snacks/' },
+    { t:'output', v:'ideas/  music/    sunshine/      glitter/' },
+  ],
+  pwd: [{ t:'output', v:'/home/sharanya/cozy-corner/portfolio 🌸' }],
+  cat: [{ t:'output', v:'🐱 Meow. (Did you mean  pets  command?)' }],
+  cd:  [{ t:'output', v:'Moved to: /sharanya/imagination 🌟 (it\'s nice here)' }],
+  hello: [
+    { t:'output', v:'Hello!! 👋 Welcome to Sharanya\'s world!' },
+    { t:'output', v:'She\'s glad you\'re here. Type  help  to explore! 🌸' },
+  ],
+  hi: [
+    { t:'output', v:'Hi hi hi!! 💖 So glad you stopped by!' },
+    { t:'output', v:'Type  whoami  to meet Sharanya! ✨' },
+  ],
+  bye: [
+    { t:'output', v:'Aww, leaving so soon? 🥺' },
+    { t:'output', v:'Come back anytime. The terminal will be here, being cute. 🌸' },
+  ],
+  art: [
+    { t:'output', v:'Did someone say ART?! 🎨🎨🎨' },
+    { t:'output', v:'That\'s basically Sharanya\'s whole personality.' },
+    { t:'output', v:'Type  hobbies  or  projects  to see more! 🖌️' },
+  ],
+  draw: [
+    { t:'art',    v:'    .\'\'.' },
+    { t:'art',    v:'   ( o o )' },
+    { t:'art',    v:'    ) ( )  ← a lil doodle, just for you' },
+    { t:'art',    v:'   (_(__)' },
+  ],
+  story: [
+    { t:'output', v:'"Once upon a time, someone visited Sharanya\'s portfolio.' },
+    { t:'output', v:' They typed  story  and got this message.' },
+    { t:'output', v:' The end. It was a short story. But meaningful." — Sharanya, probably' },
+  ],
+  pizza: [
+    { t:'output', v:'🍕 Pizza has nothing to do with this portfolio.' },
+    { t:'output', v:'   And yet here you are. Here we both are.' },
+    { t:'output', v:'   Respect.' },
+  ],
+  potato: [
+    { t:'output', v:'🥔 A potato. In MY terminal. Bold choice.' },
+    { t:'output', v:'   Sharanya appreciates your creativity.' },
+  ],
+  sharanya: [
+    { t:'output', v:'Yes! That\'s HER! The whole point of this website! 🌟' },
+    { t:'output', v:'Type  whoami  for the full scoop. 🌸' },
+  ],
+};
+
+function printLine(line, delay = 0) {
+  setTimeout(() => {
+    if (line.t === 'spacer') {
+      const d = document.createElement('div');
+      d.className = 'line line-spacer';
+      output.appendChild(d);
+    } else {
+      const d = document.createElement('div');
+      d.className = `line line-${line.t === 'art' ? 'art' : line.t === 'info' ? 'info' : line.t === 'error' ? 'error' : line.t === 'success' ? 'success' : 'output'}`;
+      d.textContent = line.v || '';
+      output.appendChild(d);
+    }
+    output.scrollTop = output.scrollHeight;
+  }, delay);
+}
+
+function printLines(lines, baseDelay = 0) {
+  lines.forEach((l, i) => printLine(l, baseDelay + i * 30));
+  return baseDelay + lines.length * 30;
+}
+
+function runCommand(cmd) {
+  const raw = cmd.trim().toLowerCase();
+  if (!raw) return;
+
+  history.unshift(raw);
+  histIdx = -1;
+
+  const promptEl = document.createElement('div');
+  promptEl.className = 'line line-prompt';
+  promptEl.textContent = 'sharanya@portfolio:~$ ' + cmd;
+  output.appendChild(promptEl);
+  output.scrollTop = output.scrollHeight;
+
+  let lines = [];
+  
+  // Check if there's an active game
+  if (window.shareenyaGame && !window.shareenyaGame.over) {
+    const validMoves = ['rock', 'paper', 'scissors'];
+    if (validMoves.includes(raw)) {
+      const moves = ['rock', 'paper', 'scissors'];
+      const computerMove = moves[Math.floor(Math.random() * moves.length)];
+      
+      let result = '';
+      let playerWins = false;
+      let computerWins = false;
+      
+      if (raw === computerMove) {
+        result = "It's a tie! 🤝";
+      } else if (
+        (raw === 'rock' && computerMove === 'scissors') ||
+        (raw === 'paper' && computerMove === 'rock') ||
+        (raw === 'scissors' && computerMove === 'paper')
+      ) {
+        result = 'You win this round! 🎉';
+        playerWins = true;
+        window.shareenyaGame.score++;
+      } else {
+        result = 'Sharanya wins this round! 💕';
+        computerWins = true;
+        window.shareenyaGame.computerScore++;
+      }
+      
+      lines = [
+        { t:'output', v:'  You played: ' + raw + ' ✋' },
+        { t:'output', v:'  Sharanya played: ' + computerMove + ' ✋' },
+        { t:'spacer' },
+        { t:playerWins ? 'success' : computerWins ? 'error' : 'output', v:'  ' + result },
+        { t:'spacer' },
+        { t:'info', v:'Score: You ' + window.shareenyaGame.score + ' | Sharanya ' + window.shareenyaGame.computerScore },
+      ];
+      
+      if (window.shareenyaGame.score === 3) {
+        lines.push({ t:'spacer' });
+        lines.push({ t:'success', v:'🏆 YOU WON THE MATCH! Sharanya is impressed. 🏆' });
+        lines.push({ t:'spacer' });
+        lines.push({ t:'info', v:'Type  game  to play again! 🌸' });
+        window.shareenyaGame.over = true;
+      } else if (window.shareenyaGame.computerScore === 3) {
+        lines.push({ t:'spacer' });
+        lines.push({ t:'error', v:'Game Over! Sharanya won. Better luck next time! 💖' });
+        lines.push({ t:'spacer' });
+        lines.push({ t:'info', v:'Type  game  to play again! 🌸' });
+        window.shareenyaGame.over = true;
+      } else {
+        lines.push({ t:'spacer' });
+        lines.push({ t:'output', v:'Next round? Type rock, paper, or scissors! 🎯' });
+      }
+    } else if (raw === 'quit') {
+      lines = [
+        { t:'output', v:'Game quit!' },
+        { t:'output', v:'Final score: You ' + window.shareenyaGame.score + ' | Sharanya ' + window.shareenyaGame.computerScore },
+        { t:'spacer' },
+        { t:'info', v:'Type  game  to play again! 🌸' },
+      ];
+      window.shareenyaGame.over = true;
+    } else {
+      lines = [
+        { t:'error', v:'Invalid move! Type rock, paper, or scissors. (Or quit to stop.)' },
+      ];
+    }
+  } else if (COMMANDS[raw]) {
+    const result = COMMANDS[raw]();
+    if (Array.isArray(result)) lines = result;
+  } else if (EASTER_EGGS[raw]) {
+    lines = EASTER_EGGS[raw];
+  } else {
+    lines = [
+      { t:'error',  v:`Command not found: "${raw}" 💀` },
+      { t:'output', v:'Hmm. Did you make that up? Because she respects that. Very creative.' },
+      { t:'output', v:'Unfortunately it does nothing. Type  help  to see things that do. 🌸' },
+      { t:'output', v:'(But also try typing  pizza  or  potato. Just saying.)' },
+    ];
+  }
+
+  printLines(lines, 50);
+  if (raw !== 'clear') {
+    setTimeout(() => { const s = document.createElement('div'); s.className = 'line line-spacer'; output.appendChild(s); }, 50 + lines.length * 30);
+  }
+  input.value = '';
+}
+
+input.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') {
+    runCommand(input.value);
+  } else if (e.key === 'ArrowUp') {
+    e.preventDefault();
+    if (histIdx < history.length - 1) { histIdx++; input.value = history[histIdx]; }
+  } else if (e.key === 'ArrowDown') {
+    e.preventDefault();
+    if (histIdx > 0) { histIdx--; input.value = history[histIdx]; }
+    else { histIdx = -1; input.value = ''; }
+  }
+});
+
+// Boot sequence
+window.addEventListener('load', () => {
+  let delay = 0;
+  BOOT.forEach((l, i) => {
+    delay = i * 35;
+    printLine(l, delay);
+  });
+  setTimeout(() => input.focus(), delay + 200);
+});
+
+input.addEventListener('focus', () => {}, true);
+document.querySelector('.window').addEventListener('click', () => input.focus());
+</script>
+</body>
+</html>
